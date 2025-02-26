@@ -25,11 +25,9 @@ class Bike(Vehicle):
         super().display_info()
         print(f"Engine: {self.engine_capacity}")
 
-# Creating instances
 my_car = Car("Toyota", "Corolla", 2022, "Petrol")
 my_bike = Bike("Yamaha", "R15", 2021, "150cc")
 
-# Displaying information
 my_car.display_info()
-print()  # Adding a space for better readability
+print() 
 my_bike.display_info()
