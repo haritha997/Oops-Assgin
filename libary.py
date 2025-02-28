@@ -8,8 +8,7 @@ if not os.path.exists('library.json'):
 def add_book():
     title = input("Enter book title: ")
     author = input("Enter book author: ")
-    isbn = input("Enter book ISBN: ")
-    
+
     try:
         copies_available = int(input("Enter number of copies available: "))  
     except ValueError:
@@ -24,7 +23,7 @@ def add_book():
             print("This book already exists!")
             return
 
-        data[title] = {"title": title, "author": author, "isbn": isbn, "copies_available": copies_available}
+        data[title] = {"title": title, "author": author, "copies_available": copies_available}
 
         with open('library.json', 'w') as f:
             json.dump(data, f, indent=4)  
@@ -61,25 +60,25 @@ def view_book_records():
 
         print("\nLibrary Records:")
         for title, book in data.items():
-            print(f"Title: {book['title']}, Author: {book['author']}, ISBN: {book['isbn']}, Copies Available: {book['copies_available']}")
+            print(f"Title: {book['title']}, Author: {book['author']}, Copies Available: {book['copies_available']}")
 
     except FileNotFoundError:
         print("Error: File not found!")
     except json.JSONDecodeError:
         print("Error: Invalid JSON format!")
 
-def search_isbn():
-    isbn = input("Enter book ISBN to search: ")
+def search_title():
+    title = input("Enter book tilte to search: ")
     
     try:
         with open('library.json', 'r') as f:
             data = json.load(f)
 
         for book in data.values():
-            if book['title'] == isbn:
-                print(f"Book Found: Title: {book['title']}, Author: {book['author']}, ISBN: {book['isbn']}, Copies Available: {book['copies_available']}")
+            if book['title'] == title:
+                print(f"Book Found: Title: {book['title']}, Author: {book['author']}, Copies Available: {book['copies_available']}")
                 return
-        print("Book with the given ISBN not found!")
+        print("Book with the given tittle not found!")
 
     except FileNotFoundError:
         print("Error: File not found!")
@@ -95,7 +94,7 @@ def main():
         print("1. Add a new book record")
         print("2. remove a book")
         print("3. Display all book records")
-        print("4. Search for a book by ISBN")
+        print("4. Search for a book by title")
         print("5. Exit")
 
         choice = input("Enter your choice: ")
@@ -107,7 +106,7 @@ def main():
         elif choice == "3":
             view_book_records()
         elif choice == "4":
-            search_isbn()
+            search_title()
         elif choice == "5":
             exit_program()
             break
